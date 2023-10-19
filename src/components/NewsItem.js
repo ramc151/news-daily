@@ -4,7 +4,6 @@ const NewsItem = (props) => {
 
     let { title, description, image, newurl, author, date } = props
     return (
-        <div className="container">
             <div className="card my-3">
                 <img className="card-img-top" src={image ? image : "https://images.indianexpress.com/2022/09/dengue1.jpg"} alt="Card  cap" />
                 <div className="card-body">
@@ -14,7 +13,6 @@ const NewsItem = (props) => {
                     <a href={newurl} rel="noreferrer" target="_blank" className="btn btn-sm btn-dark">Read More</a>
                 </div>
             </div>
-        </div>
     )
 
 }
