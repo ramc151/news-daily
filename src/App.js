@@ -1,5 +1,5 @@
 
-import './App.css';
+// import './App.css';
 
 import React, { useState } from 'react'
 import News from './components/News';
@@ -10,8 +10,7 @@ import LoadingBar from 'react-top-loading-bar';
 const App = () => {
   const page = 5
   const [progress, setProgress] = useState(0)
-  const apikey = process.env.REACT_API_KEY
-
+  const apikey = process.env.REACT_APP_API_KEY
 
   return (
     <>

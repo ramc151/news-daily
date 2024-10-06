@@ -10,13 +10,18 @@ const News = (props) => {
     const [loading, setLoading] = useState(false)
     const [page, setPage] = useState(1)
     const [totalResults, settotalResults] = useState(0)
-    
+
     const capitalizeFirst = str => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     };
+
+    // let url = 'https://newsapi.org/v2/top-headlines?country=in&apiKey=9f6fbab7d34a4d42a88117128c2bf0fa'
+
+    // 928f443456644fda8588720659361c72
+
     const updateNews = async () => {
         props.setProgress(10)
-        let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&apiKey=9f6fbab7d34a4d42a88117128c2bf0fa&category=${props.category}&page=${page}&pageSize=${props.pageSize}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${props.apikey}&category=${props.category}&page=${page}&pageSize=${props.pageSize}`;
         setLoading(true)
         let data = await fetch(url)
         props.setProgress(30)
@@ -27,19 +32,22 @@ const News = (props) => {
         setLoading(false)
         props.setProgress(100)
     }
+
     useEffect(() => {
         document.title = `NewsTree - ${capitalizeFirst(props.category)}`
         updateNews();
         // eslint-disable-next-line
     }, [])
+
     const fetchMoredata = async () => {
-        let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&apiKey=29b6f88fe8744b7bad4286beed0bdb0d&category=${props.category}&page=${page+1}&pageSize=${props.pageSize}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${props.apikey}&category=${props.category}&page=${page + 1}&pageSize=${props.pageSize}`;
         setPage(page + 1)
         let data = await fetch(url)
         let parsedata = await data.json();
         setArticles(articles.concat(parsedata.articles))
         settotalResults(parsedata.totalResults)
     }
+
     return (
         <div className="container">
             <h2 className='text-center' style={{ margin: '20px 0', marginTop: '80px' }}>NewsTree - Top {capitalizeFirst(props.category)} Headlines</h2>
@@ -66,7 +74,7 @@ const News = (props) => {
 
 News.defaultProps = {
     pageSize: 5,
-    country: 'in'
+    country: 'us'
 }
 News.propTypes = {
     pageSize: PropTypes.number,
